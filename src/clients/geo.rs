@@ -85,5 +85,77 @@ impl GeoApiClient {
         Ok(json)
     }
 
+    pub async fn get_country_by_capital(
+        &self,
+        city: &str,
+    ) -> Result<Value, Box<dyn std::error::Error>> {
+        let url = format!("{}/country/capital/{}", self.base_url.trim_end_matches('/'), city);
+
+        let mut headers = reqwest::header::HeaderMap::new();
+        headers.insert("apikey", self.api_key.parse()?);
+
+        let res = self.client
+            .get(&url)
+            .headers(headers)
+            .send()
+            .await?;
+
+        let status = res.status();
+        let text = res.text().await?;
+
+        println!("🌐 [Country By Capital] [{}]: {}", status, text);
+
+        let json: Value = serde_json::from_str(&text)?;
+        Ok(json)
+    }
+
+    pub async fn get_country_by_currency(
+        &self,
+        currency: &str,
+    ) -> Result<Value, Box<dyn std::error::Error>> {
+        let url = format!("{}/country/currency/{}", self.base_url.trim_end_matches('/'), currency);
+
+        let mut headers = reqwest::header::HeaderMap::new();
+        headers.insert("apikey", self.api_key.parse()?);
+
+        let res = self.client
+            .get(&url)
+            .headers(headers)
+            .send()
+            .await?;
+
+        let status = res.status();
+        let text = res.text().await?;
+
+        println!("🌐 [Country By Currency] [{}]: {}", status, text);
+
+        let json: Value = serde_json::from_str(&text)?;
+        Ok(json)
+    }
+
+    pub async fn get_cities_by_country(
+        &self,
+        country: &str,
+    ) -> Result<Value, Box<dyn std::error::Error>> {
+        let url = format!("{}/country/cities/{}", self.base_url.trim_end_matches('/'), country);
+
+        let mut headers = reqwest::header::HeaderMap::new();
+        headers.insert("apikey", self.api_key.parse()?);
+
+        let res = self.client
+            .get(&url)
+            .headers(headers)
+            .send()
+            .await?;
+
+        let status = res.status();
+        let text = res.text().await?;
+
+        println!("🌐 [Cities By Country] [{}]: {}", status, text);
+
+        let json: Value = serde_json::from_str(&text)?;
+        Ok(json)
+    }
+
 
 }
