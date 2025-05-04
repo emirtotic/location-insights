@@ -29,13 +29,6 @@ pub async fn get_country_by_currency(
     client.get_country_by_currency(currency).await
 }
 
-pub async fn get_cities_by_country(
-    client: &GeoApiClient,
-    country: &str,
-) -> Result<Value, Box<dyn std::error::Error>> {
-    client.get_cities_by_country(country).await
-}
-
 pub async fn get_country_by_calling_code(
     client: &GeoApiClient,
     code: &str,

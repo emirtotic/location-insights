@@ -1,5 +1,6 @@
 use serde_json::Value;
 use reqwest::{Client, header::HeaderMap};
+use tracing::log::info;
 
 #[derive(Clone)]
 pub struct GeoApiClient {
@@ -37,7 +38,7 @@ impl GeoApiClient {
         let status = res.status();
         let text = res.text().await?;
 
-        println!("🌐 Geo API [{}]: {}", status, text);
+        info!("🌐 Geo API [{}]: {}", status, text);
 
         let json: Value = serde_json::from_str(&text)?;
         Ok(json)
@@ -58,7 +59,7 @@ impl GeoApiClient {
         let status = res.status();
         let text = res.text().await?;
 
-        println!("🌐 [Country By Code] [{}]: {}", status, text);
+        info!("🌐 [Country By Code] [{}]: {}", status, text);
 
         let json: Value = serde_json::from_str(&text)?;
         Ok(json)
@@ -79,7 +80,7 @@ impl GeoApiClient {
         let status = res.status();
         let text = res.text().await?;
 
-        println!("🌐 [Country By Name] [{}]: {}", status, text);
+        info!("🌐 [Country By Name] [{}]: {}", status, text);
 
         let json: Value = serde_json::from_str(&text)?;
         Ok(json)
@@ -103,7 +104,7 @@ impl GeoApiClient {
         let status = res.status();
         let text = res.text().await?;
 
-        println!("🌐 [Country By Capital] [{}]: {}", status, text);
+        info!("🌐 [Country By Capital] [{}]: {}", status, text);
 
         let json: Value = serde_json::from_str(&text)?;
         Ok(json)
@@ -127,7 +128,7 @@ impl GeoApiClient {
         let status = res.status();
         let text = res.text().await?;
 
-        println!("🌐 [Country By Currency] [{}]: {}", status, text);
+        info!("🌐 [Country By Currency] [{}]: {}", status, text);
 
         let json: Value = serde_json::from_str(&text)?;
         Ok(json)
@@ -151,7 +152,7 @@ impl GeoApiClient {
         let status = res.status();
         let text = res.text().await?;
 
-        println!("🌐 [Cities By Country] [{}]: {}", status, text);
+        info!("🌐 [Cities By Country] [{}]: {}", status, text);
 
         let json: Value = serde_json::from_str(&text)?;
         Ok(json)
@@ -179,7 +180,7 @@ impl GeoApiClient {
         let status = res.status();
         let text = res.text().await?;
 
-        println!("🌐 [Country By Calling Code] [{}]: {}", status, text);
+        info!("🌐 [Country By Calling Code] [{}]: {}", status, text);
 
         let json: Value = serde_json::from_str(&text)?;
         Ok(json)
@@ -207,7 +208,7 @@ impl GeoApiClient {
         let status = res.status();
         let text = res.text().await?;
 
-        println!("🌐 [Country By Language] [{}]: {}", status, text);
+        info!("🌐 [Country By Language] [{}]: {}", status, text);
 
         let json: Value = serde_json::from_str(&text)?;
         Ok(json)
@@ -235,7 +236,7 @@ impl GeoApiClient {
         let status = res.status();
         let text = res.text().await?;
 
-        println!("🌐 [Countries By Region] [{}]: {}", status, text);
+        info!("🌐 [Countries By Region] [{}]: {}", status, text);
 
         let json: Value = serde_json::from_str(&text)?;
         Ok(json)
