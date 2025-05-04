@@ -35,3 +35,25 @@ pub async fn get_cities_by_country(
 ) -> Result<Value, Box<dyn std::error::Error>> {
     client.get_cities_by_country(country).await
 }
+
+pub async fn get_country_by_calling_code(
+    client: &GeoApiClient,
+    code: &str,
+) -> Result<Value, Box<dyn std::error::Error>> {
+    client.get_country_by_calling_code(code).await
+}
+
+pub async fn get_country_by_language(
+    client: &GeoApiClient,
+    lang_code: &str,
+) -> Result<Value, Box<dyn std::error::Error>> {
+    client.get_country_by_language(lang_code).await
+}
+
+pub async fn get_countries_by_region(
+    client: &GeoApiClient,
+    region: &str,
+) -> Result<Value, Box<dyn std::error::Error>> {
+    client.get_countries_by_region(region).await
+}
+
