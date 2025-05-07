@@ -70,7 +70,7 @@ async fn handler_by_code(
 ) -> Result<Json<Value>, AppError> {
     let data = get_country_by_code(&clients.geo, &query.code)
         .await
-        .map_err(|e| AppError::new("Failed to fetch country", StatusCode::BAD_REQUEST))?;
+        .map_err(|_e| AppError::new("Failed to fetch country", StatusCode::BAD_REQUEST))?;
 
     Ok(Json(data))
 }
@@ -81,7 +81,7 @@ async fn handler_by_name(
 ) -> Result<Json<Value>, AppError> {
     let data = get_country_by_name(&clients.geo, &query.name)
         .await
-        .map_err(|e| AppError::new("Failed to fetch country by name", StatusCode::BAD_REQUEST))?;
+        .map_err(|_e| AppError::new("Failed to fetch country by name", StatusCode::BAD_REQUEST))?;
 
     Ok(Json(data))
 }
@@ -92,7 +92,7 @@ async fn handler_by_capital(
 ) -> Result<Json<Value>, AppError> {
     let data = get_country_by_capital(&clients.geo, &query.city)
         .await
-        .map_err(|e| {
+        .map_err(|_e| {
             AppError::new(
                 "Failed to fetch country by capital",
                 StatusCode::BAD_REQUEST,
@@ -108,7 +108,7 @@ async fn handler_by_currency(
 ) -> Result<Json<Value>, AppError> {
     let data = get_country_by_currency(&clients.geo, &query.currency)
         .await
-        .map_err(|e| {
+        .map_err(|_e| {
             AppError::new(
                 "Failed to fetch country by currency",
                 StatusCode::BAD_REQUEST,
@@ -124,7 +124,7 @@ async fn handler_by_calling_code(
 ) -> Result<Json<Value>, AppError> {
     let data = get_country_by_calling_code(&clients.geo, &query.code)
         .await
-        .map_err(|e| {
+        .map_err(|_e| {
             AppError::new(
                 "Failed to fetch country by calling code",
                 StatusCode::BAD_REQUEST,
@@ -140,7 +140,7 @@ async fn handler_by_language(
 ) -> Result<Json<Value>, AppError> {
     let data = get_country_by_language(&clients.geo, &query.code)
         .await
-        .map_err(|e| {
+        .map_err(|_e| {
             AppError::new(
                 "Failed to fetch country by language code",
                 StatusCode::BAD_REQUEST,
@@ -156,7 +156,7 @@ async fn handler_by_region(
 ) -> Result<Json<Value>, AppError> {
     let data = get_countries_by_region(&clients.geo, &query.region)
         .await
-        .map_err(|e| {
+        .map_err(|_e| {
             AppError::new(
                 "Failed to fetch countries by region",
                 StatusCode::BAD_REQUEST,

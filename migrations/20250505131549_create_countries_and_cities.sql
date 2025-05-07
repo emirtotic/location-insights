@@ -3,7 +3,7 @@
 CREATE TABLE IF NOT EXISTS countries (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    code CHAR(2) NOT NULL UNIQUE, -- ISO 3166-1 alpha-2
+    code CHAR(2) NOT NULL UNIQUE,
     capital VARCHAR(100),
     region VARCHAR(100),
     subregion VARCHAR(100),
@@ -25,7 +25,6 @@ CREATE TABLE IF NOT EXISTS cities (
     latitude DOUBLE,
     longitude DOUBLE,
     timezone VARCHAR(100),
-    is_capital BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (country_code) REFERENCES countries(code)
 );

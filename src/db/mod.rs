@@ -1,5 +1,6 @@
 use sqlx::{mysql::MySqlPoolOptions, MySqlPool};
-use std::time::Duration;
+pub mod city_repository;
+pub mod country_repository;
 
 pub async fn init_db_pool(database_url: &str) -> MySqlPool {
     MySqlPoolOptions::new()

@@ -4,8 +4,8 @@ use std::net::SocketAddr;
 use sqlx::migrate::Migrator;
 use sqlx::MySqlPool;
 use tokio::net::TcpListener;
+use tracing::info;
 use tracing_subscriber::EnvFilter;
-use tracing::{info, warn, error, debug, trace};
 
 static MIGRATOR: Migrator = sqlx::migrate!();
 
@@ -16,13 +16,14 @@ mod services;
 mod clients;
 mod app;
 mod shared;
+mod models;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    dotenv().ok(); // učitaj .env
+    dotenv().ok();
 
-    let database_url = env::var("DATABASE_URL")?; // čita iz .env
-    let pool = MySqlPool::connect(&database_url).await?; // konekcija ka bazi
+    let database_url = env::var("DATABASE_URL")?;
+    let pool = MySqlPool::connect(&database_url).await?;
 
     MIGRATOR.run(&pool).await?;
 
@@ -31,7 +32,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .init();
 
     let config = config::Config::from_env();
-    let app = app::build_app().await;
+    let app = app::build_app(pool.clone()).await;
 
     let addr = SocketAddr::from(([127, 0, 0, 1], config.port));
     info!("🚀 Server running at http://{}", addr);
